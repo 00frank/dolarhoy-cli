@@ -13,10 +13,10 @@ const System = {
 
 const Dolar = {
   mostrarCambio: function ({ title, content}) {
-    System.out.printLn(title.text()); // dolar type title
+    System.out.printLn(chalk.underline(title.text())); // dolar type title
     let [buy, sell] = content.text().split("Venta") // dolar value ex. Compra$XXX.XXVenta$XXX.XX
     buy = buy.split("Compra")[1];
-    System.out.printLn(`${!!buy ? chalk.bgRed(`Compra ${buy}`) + ' | ' : ''}${chalk.bgGreen(`Venta ${sell}`)}`)
+    System.out.printLn(`${!!buy ? chalk.red(`Compra ${buy}`) + '\t| ' : '\t\t| '}${chalk.green(`Venta ${sell}`)}`)
   }
 }
 
@@ -30,7 +30,7 @@ async function main() {
 
     const bloqueDolares = $('.tile.dolar').children('.is-vertical').children().toArray()
 
-    System.out.printLn("=========");
+    System.out.printLn("");
 
     for (let i = 0; i < bloqueDolares.length - 1; i++) {
       let dolar = bloqueDolares[i]
@@ -38,7 +38,7 @@ async function main() {
       Dolar.mostrarCambio({ title: $(info[0]), content: $(info[1]) });
       System.out.printLn("");
     }
-    System.out.printLn("=========");
+
   } catch (error) {
     System.out.printLn('Error al hacer la solicitud HTTP:' + error);
   }
